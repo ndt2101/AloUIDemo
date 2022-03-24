@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.WelcomeFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tuan2101.alouidemo.viewmodels.SplashViewModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/splash1" />
+
+        <TextView
+            android:id="@+id/label1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:fontFamily="@font/semi_bold"
+            android:text="@string/chao_mung"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sub_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label1"
+            android:fontFamily="@font/regular"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:text="@string/hang_ngan_dich_vu"
+            android:textAlignment="center"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:background="@drawable/button_background"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+            android:drawablePadding="-160dp"
+            android:drawableTint="@color/white"
+            android:paddingEnd="@dimen/_110sdp"
+            android:text="@string/tiep"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
+            android:onClick="@{() -> viewModel.onNavToWelcome2()}"/>
+    </RelativeLayout>
+</layout>
