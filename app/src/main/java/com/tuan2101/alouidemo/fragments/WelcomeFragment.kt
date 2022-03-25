@@ -1,12 +1,13 @@
 package com.tuan2101.alouidemo.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.tuan2101.alouidemo.databinding.FragmentWelcomeBinding
 import com.tuan2101.alouidemo.viewmodels.SplashViewModel
 

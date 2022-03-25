@@ -5,10 +5,22 @@
       <map>
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/button_background.xml" value="0.1695" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/circle_indicator_background.xml" value="0.1575" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/first_indicator_bg.xml" value="0.179" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/home_app_bar_bg.xml" value="0.165" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1355" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1355" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/ic_baseline_shield_24.xml" value="0.1015" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/search_box_bg.xml" value="0.165" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/select_indicator_bg.xml" value="0.165" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/drawable/tag_bg.xml" value="0.1355" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/activity_splash.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_home.xml" value="0.18796296296296297" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_service_item.xml" value="0.176" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_welcome2.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/service_item.xml" value="0.4" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/tag_item.xml" value="0.4" />
       </map>
     </option>
   </component>

@@ -55,13 +55,13 @@
             android:layout_marginBottom="@dimen/_15sdp"
             android:background="@drawable/button_background"
             android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
-            android:drawablePadding="-160dp"
+            android:drawablePadding="-140dp"
             android:drawableTint="@color/white"
+            android:onClick="@{() -> viewModel.onNavToWelcome2()}"
             android:paddingEnd="@dimen/_110sdp"
             android:text="@string/tiep"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp"
-            android:onClick="@{() -> viewModel.onNavToWelcome2()}"/>
+            android:textSize="@dimen/_16ssp" />
     </RelativeLayout>
 </layout>

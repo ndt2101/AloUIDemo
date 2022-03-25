@@ -7,4 +7,7 @@
     <string name="tiep">Tiếp</string>
     <string name="that_tuyet_voi">Thật tuyệt vời khi bạn ở nhà và có thể tìm kiếm các dịch vụ quanh mình</string>
     <string name="bat_vi_tri">Bật vị trí</string>
+    <string name="tim_kiem_dich_vu_ban_can">Tìm kiếm dịch vụ bạn cần</string>
+    <string name="active_time">%s-%sh</string>
+    <string name="distance">%.2fkm</string>
 </resources>
