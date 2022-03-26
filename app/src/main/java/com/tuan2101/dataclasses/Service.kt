@@ -15,5 +15,6 @@ class Service(
     val location: Float,
     val openTime: String,
     val closeTime: String,
-    val rate: Float
+    val rate: Float,
+    val sale: String?
 ) : BaseObject(id, name)

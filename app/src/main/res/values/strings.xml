@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AloUIDemo</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="chao_mung">Chào mừng bạn đến với Alo!</string>
     <string name="hang_ngan_dich_vu">Hàng ngàn dịch vụ đang chờ bạn khám phá. Hãy dạo một vòng trên Alo và tìm kiếm bất kì dịch vụ nào bạn cần nhé!</string>
@@ -10,4 +9,9 @@
     <string name="tim_kiem_dich_vu_ban_can">Tìm kiếm dịch vụ bạn cần</string>
     <string name="active_time">%s-%sh</string>
     <string name="distance">%.2fkm</string>
+    <string name="home">Trang chủ</string>
+    <string name="schedule">Đặt lịch</string>
+    <string name="account">Tài khoản</string>
+    <string name="saved_nothing">Bạn chưa có dịch vụ nào được gim</string>
+    <string name="lets_choose">Hãy lựa chọn Nhà Cung Cấp yêu thích và gim vào tại đây nhé</string>
 </resources>

@@ -6,7 +6,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:scrimAnimationDuration="250"
+                app:scrimAnimationDuration="0"
                 app:scrimVisibleHeightTrigger="58dp"
                 app:titleEnabled="false">
 
@@ -42,7 +42,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_165sdp"
                             android:layout_marginTop="25dp"
-                            android:background="@drawable/test" />
+                            android:background="@drawable/test"
+                            android:nestedScrollingEnabled="false"/>
 
                         <View
                             android:id="@+id/logo"
@@ -99,13 +100,15 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginTop="5dp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="1dp"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:tabSelectedTextColor="@color/theme_color"
                 app:tabTextAppearance="@style/tabItemText"
                 app:tabTextColor="#817A7A"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicator="@drawable/tab_indicator_bg"
                 tools:selectedItemPosition="1" />
         </com.google.android.material.appbar.AppBarLayout>
 

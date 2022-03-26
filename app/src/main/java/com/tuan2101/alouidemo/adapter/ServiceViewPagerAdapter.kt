@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.tuan2101.alouidemo.fragments.ServiceItemFragment
+import com.tuan2101.alouidemo.utils.ServiceType
 import com.tuan2101.alouidemo.viewmodels.HomeViewModel
 
 /**
@@ -18,10 +19,10 @@ class ServiceViewPagerAdapter(activity: FragmentActivity, val viewModel: HomeVie
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> ServiceItemFragment("top_service", viewModel)
-            1 -> ServiceItemFragment("new_service", viewModel)
-            2 -> ServiceItemFragment("saved_service", viewModel)
-            else -> ServiceItemFragment("top_service", viewModel)
+            0 -> ServiceItemFragment(ServiceType.TOPSERVICE, viewModel)
+            1 -> ServiceItemFragment(ServiceType.NEWSERVICE, viewModel)
+            2 -> ServiceItemFragment(ServiceType.SAVEDSERVICE, viewModel)
+            else -> ServiceItemFragment(ServiceType.TOPSERVICE, viewModel)
         }
     }
 }

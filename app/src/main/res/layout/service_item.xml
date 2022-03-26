@@ -33,6 +33,7 @@
             android:src="@drawable/ic_baseline_shield_24"
             app:layout_constraintStart_toEndOf="@id/avt"
             app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{service.trusted ? View.VISIBLE : View.GONE}"
             app:tint="@color/theme_color" />
 
         <TextView
@@ -67,23 +68,24 @@
             tools:listitem="@layout/tag_item" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tags"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/avt"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/tags">
 
             <TextView
                 android:id="@+id/rate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/_2sdp"
                 android:text="@{String.valueOf(service.rate)}"
                 android:textColor="#1B2739"
                 app:drawableStartCompat="@drawable/ic_baseline_star_24"
                 app:drawableTint="@color/orange"
-                android:layout_weight="1"
-                android:drawablePadding="@dimen/_2sdp"
                 tools:text="4.5" />
 
             <TextView
@@ -92,11 +94,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
                 android:layout_weight="1"
-                tools:text="08-18h"
-                android:textColor="#1B2739"
                 android:drawablePadding="@dimen/_2sdp"
                 android:text="@{@string/active_time(service.openTime, service.closeTime)}"
-                app:drawableStartCompat="@drawable/ic_baseline_access_time_24" />
+                android:textColor="#1B2739"
+                app:drawableStartCompat="@drawable/ic_baseline_access_time_24"
+                tools:text="08-18h" />
 
             <TextView
                 android:id="@+id/location"
@@ -104,17 +106,43 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:textColor="#1B2739"
-                android:text="@{@string/distance(service.location)}"
-                tools:text="0.3km"
                 android:drawablePadding="@dimen/_2sdp"
-                app:drawableStartCompat="@drawable/ic_baseline_location_on_24" />
+                android:text="@{@string/distance(service.location)}"
+                android:textColor="#1B2739"
+                app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+                tools:text="0.3km" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/discount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout"
+            tools:text="Giảm giá 30% tất cả các dịch vụ nhân dịp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:drawableStartCompat="@drawable/ic_baseline_discount_24"
+            android:padding="4dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:background="#F6F9FD"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@{service.sale}"
+            android:textColor="#1B2739"
+            android:drawablePadding="8dp"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="@{service.sale != null ? View.VISIBLE : View.GONE}"/>
+
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            app:layout_constraintTop_toBottomOf="@id/avt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/discount"
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@color/gray"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

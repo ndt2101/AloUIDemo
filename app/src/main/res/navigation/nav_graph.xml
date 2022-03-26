@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_grap"
-    app:startDestination="@id/homeFragment">
-
+    app:startDestination="@id/hostFragment">
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.tuan2101.alouidemo.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/hostFragment"
+        android:name="com.tuan2101.alouidemo.fragments.HostFragment"
+        android:label="HostFragment"
+        tools:layout="@layout/fragment_host"/>
 </navigation>
