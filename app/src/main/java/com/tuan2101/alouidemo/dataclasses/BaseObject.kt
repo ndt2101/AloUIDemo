@@ -1,12 +1,11 @@
-package com.tuan2101.dataclasses
+package com.tuan2101.alouidemo.dataclasses
 
-import lombok.Data
 
 /**
  * Created by ndt2101 on 3/25/2022.
  */
 
-@Data
+
 open class BaseObject(
     val id: Long,
     val name: String

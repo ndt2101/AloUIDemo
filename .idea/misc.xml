@@ -23,12 +23,14 @@
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_empty_service.xml" value="0.25" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_home.xml" value="0.23157894736842105" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_host.xml" value="0.24444444444444444" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_personal.xml" value="0.10989583333333333" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_service_item.xml" value="0.176" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/fragment_welcome2.xml" value="0.25" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/service_item.xml" value="0.264" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/layout/tag_item.xml" value="0.2" />
         <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/menu/bottom_nav_view_menu.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/AloUIDemo/app/src/main/res/xml/chip.xml" value="0.14074074074074075" />
       </map>
     </option>
   </component>

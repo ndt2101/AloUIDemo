@@ -3,78 +3,131 @@ package com.tuan2101.alouidemo.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tuan2101.dataclasses.Service
+import com.tuan2101.alouidemo.dataclasses.Service
+import com.tuan2101.alouidemo.repositories.HomeRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 /**
  * Created by ndt2101 on 3/25/2022.
  */
-class HomeViewModel() : ViewModel() {
-    private val _topServices = MutableLiveData<List<Service>>(ArrayList())
-    val topServices: LiveData<List<Service>>
-        get() = _topServices
-    private val _adImages = MutableLiveData<List<String>>(ArrayList())
-    val adImages: LiveData<List<String>>
-        get() = _adImages
-    private val _savedServices = MutableLiveData<List<Service>>(ArrayList())
-    val savedServices: LiveData<List<Service>>
-        get() = _savedServices
-    private val _newServices = MutableLiveData<List<Service>>(ArrayList())
-    val newServices: LiveData<List<Service>>
-        get() = _newServices
+class HomeViewModel(val homeRepository: HomeRepository) : ViewModel() {
+    private val job = Job()
+    private val ioScope = CoroutineScope(Dispatchers.IO + job)
 
-    fun getAdImages() {
-        val list = ArrayList<String>()
-        list.addAll(
-            listOf(
-                "https://scontent.fhan5-3.fna.fbcdn.net/v/t39.30808-6/271644589_279341770926758_6514186456921939312_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=e3f864&_nc_ohc=K6AVfksI1ToAX84STQC&_nc_ht=scontent.fhan5-3.fna&oh=00_AT-sS2oxAE59E4OIPAGK-MvxWcN_xmfP86wyNWlqrQUYQg&oe=62446874",
-                "https://scontent.fhan5-4.fna.fbcdn.net/v/t39.30808-6/270731409_273467178180884_936605084554604672_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=730e14&_nc_ohc=Ds1KSSOu060AX_iXJsM&_nc_ht=scontent.fhan5-4.fna&oh=00_AT88ZKO6atqms10BRaICOy14O52ZjEmNDL5imusBR3cNNg&oe=6244702F",
-                "https://scontent.fhan5-7.fna.fbcdn.net/v/t39.30808-6/268265386_268447682016167_2752292146128850974_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=730e14&_nc_ohc=vVu9rQ7GZakAX99nzlW&_nc_ht=scontent.fhan5-7.fna&oh=00_AT8KRfLswb2lnEJZ8fNVWv1EfyDl0MJBoZAdyG65YyZW0A&oe=62440A86"
-            )
-        )
-        _adImages.postValue(list)
+    private val _fetchingTopServicesDataState = MutableLiveData<FetchingServicesDataState>()
+    val fetchingTopServicesDataState: LiveData<FetchingServicesDataState>
+        get() = _fetchingTopServicesDataState
+    private val _fetchingNewServicesDataState = MutableLiveData<FetchingServicesDataState>()
+    val fetchingNewServicesDataState: LiveData<FetchingServicesDataState>
+        get() = _fetchingNewServicesDataState
+    private val _fetchingSavedServicesDataState = MutableLiveData<FetchingServicesDataState>()
+    val fetchingSavedServicesDataState: LiveData<FetchingServicesDataState>
+        get() = _fetchingSavedServicesDataState
+    private val _fetchingAdImagesDataState = MutableLiveData<FetchingAdImagesDataState>()
+    val fetchingAdImagesDataState: LiveData<FetchingAdImagesDataState>
+        get() = _fetchingAdImagesDataState
+
+    data class FetchingServicesDataState(
+        val isLoading: Boolean,
+        val services: List<Service>?,
+        val error: String?
+    )
+
+    data class FetchingAdImagesDataState(
+        val isLoading: Boolean,
+        val adImages: List<String>?,
+        val error: String?
+    )
+
+    private fun emitFetchingAdImageDataState(
+        isLoading: Boolean = false,
+        adImages: List<String>? = null,
+        error: String? = null
+    ) {
+        _fetchingAdImagesDataState.postValue(FetchingAdImagesDataState(isLoading, adImages, error))
     }
 
-    fun getTopServices() {
-        val list = ArrayList<Service>()
-        val tags = ArrayList<String>()
-        tags.add("Sửa chữa điểu hòa")
-        tags.add("Thay mực")
-        tags.add("Sửa đồ")
-        tags.add("Sửa đồ")
-        tags.add("Sửa đồ")
-        val service = Service(
-            0,
-            "Sửa điều hòa Kim Thành",
-            true,
-            "https://dstgroup.vn/wp-content/uploads/2021/05/ad8932ee4830bb6ee221.jpg",
-            tags,
-            0.3f,
-            "08",
-            "18",
-            4.5f,
-            null
-        )
-
-        val service2 = Service(
-            0,
-            "Sửa điều hòa Kim Thành",
-            false,
-            "https://dstgroup.vn/wp-content/uploads/2021/05/ad8932ee4830bb6ee221.jpg",
-            tags,
-            0.3f,
-            "08",
-            "18",
-            4.5f,
-            "Giảm giá 30% tất cả các dịch vụ nhân dịp khai chuong cua hang"
-        )
-        list.add(service)
-        list.add(service2)
-        list.add(service)
-        list.add(service)
-        list.add(service)
-        list.add(service)
-        list.add(service)
-        _topServices.postValue(list)
+    fun onFetchingAdImages() {
+        ioScope.launch {
+            runCatching {
+                emitFetchingAdImageDataState(isLoading = true)
+                homeRepository.fetchAdImages()
+            }.onSuccess {
+                emitFetchingAdImageDataState(adImages = it)
+            }.onFailure {
+                emitFetchingAdImageDataState(error = it.message)
+            }
+        }
     }
 
+    private fun emitFetchingTopServicesDataState(
+        isLoading: Boolean = false,
+        topServices: List<Service>? = null,
+        error: String? = null
+    ) {
+        _fetchingTopServicesDataState.postValue(FetchingServicesDataState(isLoading, topServices, error))
+    }
+
+    fun onFetchingTopServices() {
+        ioScope.launch {
+            runCatching {
+                emitFetchingTopServicesDataState(isLoading = true)
+                homeRepository.fetchTopServices()
+            }.onSuccess {
+                emitFetchingTopServicesDataState(topServices = it)
+            }.onFailure {
+                emitFetchingTopServicesDataState(error = it.message)
+            }
+        }
+    }
+
+    private fun emitFetchingNewServicesDataState(
+        isLoading: Boolean = false,
+        topServices: List<Service>? = null,
+        error: String? = null
+    ) {
+        _fetchingNewServicesDataState.postValue(FetchingServicesDataState(isLoading, topServices, error))
+    }
+
+    fun onFetchingNewServices() {
+        ioScope.launch {
+            runCatching {
+                emitFetchingNewServicesDataState(isLoading = true)
+                homeRepository.fetchNewServices()
+            }.onSuccess {
+                emitFetchingNewServicesDataState(topServices = it)
+            }.onFailure {
+                emitFetchingNewServicesDataState(error = it.message)
+            }
+        }
+    }
+
+    private fun emitFetchingSavedServicesDataState(
+        isLoading: Boolean = false,
+        topServices: List<Service>? = null,
+        error: String? = null
+    ) {
+        _fetchingSavedServicesDataState.postValue(FetchingServicesDataState(isLoading, topServices, error))
+    }
+
+    fun onFetchingSavedServices() {
+        ioScope.launch {
+            runCatching {
+                emitFetchingSavedServicesDataState(isLoading = true)
+                homeRepository.fetchSavedServices()
+            }.onSuccess {
+                emitFetchingSavedServicesDataState(topServices = it)
+            }.onFailure {
+                emitFetchingSavedServicesDataState(error = it.message)
+            }
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
 }

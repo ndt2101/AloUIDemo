@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tuan2101.alouidemo.databinding.ServiceItemBinding
-import com.tuan2101.dataclasses.Service
+import com.tuan2101.alouidemo.dataclasses.Service
 
 /**
  * Created by ndt2101 on 3/25/2022.

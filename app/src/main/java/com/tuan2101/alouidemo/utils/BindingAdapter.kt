@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.tuan2101.alouidemo.R
-import com.tuan2101.dataclasses.Service
+import com.tuan2101.alouidemo.dataclasses.Service
 
 /**
  * Created by ndt2101 on 3/25/2022.

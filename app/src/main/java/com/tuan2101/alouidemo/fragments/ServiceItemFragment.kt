@@ -1,11 +1,11 @@
 package com.tuan2101.alouidemo.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.tuan2101.alouidemo.R
 import com.tuan2101.alouidemo.adapter.ServiceAdapter
 import com.tuan2101.alouidemo.databinding.FragmentServiceItemBinding
@@ -29,34 +29,62 @@ class ServiceItemFragment(val type: ServiceType, val viewModel: HomeViewModel) :
     }
 
     private fun setObserve() {
-        when(type) {
+        when (type) {
             ServiceType.TOPSERVICE -> {
-                viewModel.getTopServices()
-                viewModel.topServices.observe(viewLifecycleOwner) {
+                viewModel.onFetchingTopServices()
+                viewModel.fetchingTopServicesDataState.observe(viewLifecycleOwner) {
                     it?.let {
-                        adapter.submitList(it)
-                    }
+                        binding.animationView.visibility =
+                            if (it.isLoading) View.VISIBLE else View.GONE
+                        it.services?.let { topServices ->
+                            adapter.submitList(topServices)
+                        } ?: run {
+                            it.error?.let { error ->
+                                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } ?: return@observe
                 }
             }
             ServiceType.NEWSERVICE -> {
-                viewModel.getTopServices()
-                viewModel.newServices.observe(viewLifecycleOwner) {
+                viewModel.onFetchingNewServices()
+                viewModel.fetchingNewServicesDataState.observe(viewLifecycleOwner) {
                     it?.let {
-                        adapter.submitList(it)
-                    }
+                        binding.animationView.visibility =
+                            if (it.isLoading) View.VISIBLE else View.GONE
+                        it.services?.let { newServices ->
+                            adapter.submitList(newServices)
+                        } ?: run {
+                            it.error?.let { error ->
+                                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } ?: return@observe
                 }
             }
 
             ServiceType.SAVEDSERVICE -> {
+                viewModel.onFetchingSavedServices()
                 val emptyServiceFragment = EmptyServiceFragment()
-                viewModel.savedServices.observe(viewLifecycleOwner) {
-                    if (it.isNullOrEmpty()) {
-                        binding.rcv.visibility = View.GONE
-                        binding.transactionLayout.visibility = View.VISIBLE
-                        childFragmentManager.beginTransaction().replace(R.id.transaction_layout, emptyServiceFragment).commit()
-                    } else {
-                        adapter.submitList(it)
-                    }
+                viewModel.fetchingSavedServicesDataState.observe(viewLifecycleOwner) {
+                    it?.let {
+                        binding.animationView.visibility =
+                            if (it.isLoading) View.VISIBLE else View.GONE
+                        it.services?.let { savedServices ->
+                            if (savedServices.isEmpty()) {
+                                binding.rcv.visibility = View.GONE
+                                binding.transactionLayout.visibility = View.VISIBLE
+                                childFragmentManager.beginTransaction()
+                                    .replace(R.id.transaction_layout, emptyServiceFragment).commit()
+                            } else {
+                                adapter.submitList(savedServices)
+                            }
+                        } ?: run {
+                            it.error?.let { error ->
+                                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } ?: return@observe
                 }
             }
         }

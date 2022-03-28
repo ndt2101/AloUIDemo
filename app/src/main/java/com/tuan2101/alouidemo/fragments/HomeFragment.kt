@@ -4,25 +4,24 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tuan2101.alouidemo.R
 import com.tuan2101.alouidemo.adapter.AdvertisementAdapter
-import com.tuan2101.alouidemo.adapter.ServiceAdapter
 import com.tuan2101.alouidemo.adapter.ServiceViewPagerAdapter
 import com.tuan2101.alouidemo.databinding.FragmentHomeBinding
 import com.tuan2101.alouidemo.viewmodels.HomeViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    lateinit var viewModel: HomeViewModel
+    val viewModel: HomeViewModel by viewModel()
     lateinit var binding: FragmentHomeBinding
     private val tabTitleList = arrayListOf("Top dịch vụ", "Dịch vụ mới", "Ghim")
     private lateinit var adAdapter: AdvertisementAdapter
@@ -35,17 +34,16 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         setScrollAnim()
         setupForServiceTab()
-        viewModel.getAdImages()
+        viewModel.onFetchingAdImages()
         setObserve()
         return binding.root
     }
 
-    fun setupAdViewPager() {
+    private fun setupAdViewPager() {
         runnable = Runnable {
-            if (binding.adViewpager.currentItem == viewModel.adImages.value!!.size - 1) {
+            if (binding.adViewpager.currentItem == viewModel.fetchingAdImagesDataState.value!!.adImages!!.size - 1) {
                 binding.adViewpager.currentItem = 0
             } else {
                 binding.adViewpager.currentItem = binding.adViewpager.currentItem + 1
@@ -72,13 +70,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun setObserve() {
-        viewModel.adImages.observe(viewLifecycleOwner) {
+    private fun setObserve() {
+        viewModel.fetchingAdImagesDataState.observe(viewLifecycleOwner) {
             it?.let {
-                adAdapter = AdvertisementAdapter(it)
-                binding.adViewpager.adapter = adAdapter
-                binding.indicator.setViewPager(binding.adViewpager)
-                setupAdViewPager()
+                it.adImages?.let { adImages ->
+                    adAdapter = AdvertisementAdapter(adImages)
+                    binding.adViewpager.adapter = adAdapter
+                    binding.indicator.setViewPager(binding.adViewpager)
+                    setupAdViewPager()
+                } ?: run {
+                    it.error?.let { error ->
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                    }
+                } ?: return@observe
             }
         }
     }
@@ -94,7 +98,8 @@ class HomeFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         runnable?.let {
-            handler.removeCallbacks(it)        }
+            handler.removeCallbacks(it)
+        }
     }
 
     override fun onResume() {
