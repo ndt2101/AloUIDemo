@@ -14,6 +14,12 @@ class HomeRepositoryImpl(): HomeRepository {
         tags.add("Sửa đồ")
         tags.add("Sửa đồ")
         tags.add("Sửa đồ")
+
+        val tags2 = ArrayList<String>()
+        tags2.add("Sửa chữa điểu hòa tu lanh may giat")
+        tags2.add("Sửa đồ")
+        tags2.add("Sửa đồ")
+        tags2.add("Sửa đồ")
         val service = Service(
             0,
             "Sửa điều hòa Kim Thành",
@@ -32,7 +38,7 @@ class HomeRepositoryImpl(): HomeRepository {
             "Sửa điều hòa Kim Thành",
             false,
             "https://dstgroup.vn/wp-content/uploads/2021/05/ad8932ee4830bb6ee221.jpg",
-            tags,
+            tags2,
             0.3f,
             "08",
             "18",
